@@ -10,8 +10,8 @@ import CashFlowChart from "@/components/dashboard/CashFlowChart.vue";
 import FinanceSummary from "@/components/dashboard/FinanceSummary.vue";
 import PaymentSummary from "@/components/dashboard/PaymentSummary.vue";
 import RecentTransactions from "@/components/dashboard/RecentTransactions.vue";
-import RecentMembers from "@/components/dashboard/RecentMembers.vue";
 import RecentPayments from "@/components/dashboard/RecentPayments.vue";
+import RecentMembers from "@/components/dashboard/RecentMembers.vue";
 import InventoryAlert from "@/components/dashboard/InventoryAlert.vue";
 import { ref, watch } from "vue";
 
@@ -96,13 +96,7 @@ watch(
 
             <RecentTransactions :transactions="recentTransactions" />
 
-            <div class="grid gap-6 lg:grid-cols-2">
-                <InventoryAlert :items="lowStockItems" />
-                <RecentMembers :members="recentMembers" />
-            </div>
-
             <RecentPayments :payments="recentPayments" />
-
         </div>
     </AppLayout>
 </template>
