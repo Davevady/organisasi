@@ -48,6 +48,7 @@ const formatDate = (dateString: string) => {
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
+
         <Head title="Transaction Details" />
         <div class="p-6 max-w-3xl mx-auto space-y-6">
             <div class="flex items-center justify-between">
@@ -55,9 +56,6 @@ const formatDate = (dateString: string) => {
                     <h1 class="text-2xl font-bold tracking-tight">
                         Transaction Details
                     </h1>
-                    <p class="text-sm text-muted-foreground">
-                        Detailed information for transaction {{ transaction.transaction_code }}
-                    </p>
                 </div>
                 <Link href="/cash-transaction">
                     <Button variant="outline">Back to List</Button>
@@ -93,7 +91,7 @@ const formatDate = (dateString: string) => {
                         <div>
                             <span class="text-muted-foreground block">Cash Account</span>
                             <span class="font-medium mt-1 block">
-                                {{ transaction.cash_account.code }} - {{ transaction.cash_account.name }}
+                                {{ transaction.cash_account.name }} ({{ transaction.cash_account.code }})
                             </span>
                         </div>
                         <div>
@@ -123,7 +121,8 @@ const formatDate = (dateString: string) => {
 
                         <div v-if="transaction.notes">
                             <span class="text-muted-foreground text-sm block">Notes</span>
-                            <p class="text-sm mt-1 text-muted-foreground whitespace-pre-line bg-muted/10 p-3 rounded border">
+                            <p
+                                class="text-sm mt-1 text-muted-foreground whitespace-pre-line bg-muted/10 p-3 rounded border">
                                 {{ transaction.notes }}
                             </p>
                         </div>
