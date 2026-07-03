@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\{Exceptions, Middleware};
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use App\Http\Middleware\{HandleAppearance, HandleInertiaRequests};
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -124,4 +127,24 @@ return Application::configure(basePath: dirname(__DIR__))
                 return response()->json($response, $statusCode);
             }
         });
+        
+        // Web / Inertia Response
+    $exceptions->respond(function (Response $response, Throwable $e, Request $request) {
+
+        if ($request->is('api/*') || $request->expectsJson()) {
+            return $response;
+        }
+
+        $status = $response->getStatusCode();
+
+        if (in_array($status, [403, 404, 500, 503])) {
+
+            return Inertia::render('Errors/Error', [
+                'status' => $status,
+            ])->toResponse($request)->setStatusCode($status);
+
+        }
+
+        return $response;
+    });
     })->create();
