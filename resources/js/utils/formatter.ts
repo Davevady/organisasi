@@ -2,11 +2,13 @@ export const formatCurrency = (
     value: number | string | null | undefined,
     prefix = "Rp"
 ): string => {
-    if (value === null || value === undefined || value === "") {
+    const amount = Number(value ?? 0);
+
+    if (Number.isNaN(amount)) {
         return `${prefix} 0`;
     }
 
-    return `${prefix} ${Number(value).toLocaleString("id-ID")}`;
+    return `${prefix} ${amount.toLocaleString("id-ID")}`;
 };
 
 export const formatNumber = (
