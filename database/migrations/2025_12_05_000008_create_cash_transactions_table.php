@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('reference_number')->nullable();
             $table->string('attachment')->nullable(); // File bukti transaksi
             $table->foreignId('recorded_by')->constrained('users')->onDelete('restrict');
+
             $table->timestamps();
+            $table->softDeletes(); // Menambahkan kolom deleted_at
 
             $table->index('transaction_date');
             $table->index('type');
